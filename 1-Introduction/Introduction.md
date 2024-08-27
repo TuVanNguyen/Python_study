@@ -63,12 +63,66 @@
   * dictionaries: unordered collection of key-value pairs
   * sets: unordered collection of unique data objects
 
-### Operators for Ordered Collection (aka Sequences) 
+### Ordered Collections (aka Sequences) 
+
+```commandline
+myList = [1.5,1,"cat",True]
+myString = "I am a string"
+myTuple = (1,False,"kitty")
+```
+
 | Operator | Description                                                 |
 |----------|-------------------------------------------------------------|
-| []       | indexing; access i<sup>th</sup> element in sequence         |
+| [ ]      | indexing; access i<sup>th</sup> element in sequence         |
 | +        | concatenation; join two sequences together                  |
 | *        | repetition; join copies of the same sequence i times        |
 | in       | membership; return bool for whether item is in the sequence |
 | len()    | length; returns number of items in the sequence             |
 | [i:j]    | slicing; return the i<sup>th</sup> to j<sup>th</sup> item   |
+
+### Sets
+
+```commandline
+mySet = {3,6,"cat",4.5,False}
+```
+
+| Operator   | Description                                                       |
+|------------|-------------------------------------------------------------------|
+| in         | membership; return True if item in set, else False                |
+| len()      | length; number of items in set                                    |
+| x &#124; y | union; returns new set with all elements from set x and y         |
+| x & y      | intersection; returns new set with elements common to set x and y |
+| x-y        | difference; returns new set with all items in set x not in set y  |
+| x <= y     | subset; returns bool of whether x is subset of y                  |
+
+### Dictionaries
+
+```commandline
+capitals = {'Iowa':'DesMoines','Wisconsin':'Madison'}
+```
+
+| Operator         | Description                            |
+|------------------|----------------------------------------|
+| myDict[key]      | get value for key in dict              |
+| key in myDict    | return True if key in dict, else False |
+| del myDict[key]  | delete key from dict                   |
+
+### 1.9.1 String Formatting
+
+#### Using print()
+
+```commandline
+aName = "Mary"
+age=19
+print("%s is %d years old." % (aName, age))
+# Output:"Mary is 19 years old"
+```
+
+| Format Operator | Description                      |
+|-----------------|----------------------------------|
+| %d, %i          | integer                          |
+| %u              | unsigned integer                 |
+| %f              | floating point as m.ddddd        |
+| %e              | floating point as m.ddddde+/-xx  |
+| %E              | floating point as m.dddddE+/-xx  |
+| %c              | single character                 | 
