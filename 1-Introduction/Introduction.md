@@ -65,7 +65,7 @@
 
 ### Ordered Collections (aka Sequences) 
 
-```commandline
+```python
 myList = [1.5,1,"cat",True]
 myString = "I am a string"
 myTuple = (1,False,"kitty")
@@ -82,7 +82,7 @@ myTuple = (1,False,"kitty")
 
 ### Sets
 
-```commandline
+```python
 mySet = {3,6,"cat",4.5,False}
 ```
 
@@ -97,7 +97,7 @@ mySet = {3,6,"cat",4.5,False}
 
 ### Dictionaries
 
-```commandline
+```python
 capitals = {'Iowa':'DesMoines','Wisconsin':'Madison'}
 ```
 
@@ -112,17 +112,122 @@ capitals = {'Iowa':'DesMoines','Wisconsin':'Madison'}
 #### Using print()
 
 ```commandline
-aName = "Mary"
-age=19
-print("%s is %d years old." % (aName, age))
-# Output:"Mary is 19 years old"
+>> aName = "Mary"
+>> age=19
+>> print("%s is %d years old." % (aName, age))
+Mary is 19 years old
+
+>>name = {'first': Mary, 'last': Sue }
+>> print("No one is more hateable than a %(first)s %(last)s "%name)
 ```
 
-| Format Operator | Description                      |
-|-----------------|----------------------------------|
-| %d, %i          | integer                          |
-| %u              | unsigned integer                 |
-| %f              | floating point as m.ddddd        |
-| %e              | floating point as m.ddddde+/-xx  |
-| %E              | floating point as m.dddddE+/-xx  |
-| %c              | single character                 | 
+| Format Operator | Description                     |
+|-----------------|---------------------------------|
+| %d, %i          | integer                         |
+| %u              | unsigned integer                |
+| %f              | floating point as m.ddddd       |
+| %e              | floating point as m.ddddde+/-xx |
+| %E              | floating point as m.dddddE+/-xx |
+| %c              | single character                |
+| %s              | string                          |
+| %%              | literal %                       |
+| %20s            | value in 20 char wide field     |
+| %-20s           | value in 20 char wide field, left justified |
+| %+20s           | value in 20 char wide field, right justified |
+| %20.2f          | value in 20 char wide field, with 2 char right of decimal |
+| %(key)s         | get value from dictionary |
+
+## Control Structures
+
+Two Types of Control Structures:
+  * Iteration/loops e.g while, for
+  * Selection e.g if-else statements
+
+
+### While Loops
+
+```python
+counter = 1
+while counter <= 5:
+    print("Iteration #%d"%counter)
+    counter += 1
+```
+
+### For Loops
+  * iterates over a collection
+
+```python
+for counter in [1,2,3,4,5]:
+    print("Iteration #%d"%counter)
+
+for counter in range(1,5):
+    print("Iteration #%d"%counter)
+```
+
+### If-else Statements
+
+```python
+temperature=100
+if temperature < 0:
+    print("Frigid")
+elif temperature < 60:
+    print("Cold")
+elif temperature < 90:
+    print("Temperate")
+else:
+    print("Hot")
+```
+
+### Comphrehensions
+  * allows you to generate a collection using one-line control structures
+
+```commandline
+>>> [2*x for x in range(1,5)]
+[2,4,6,8,10]
+```
+
+## Exception Handling
+
+Types of errors:
+  * Syntax error: mistake violating languages's rules and resulting in runtime error
+  * Logic error: program executes but has unexpected behavior that can lead to runtime error
+
+* def Exceptions: runtime errors that result from logic errors
+  * programmers can "handle" exceptions, deciding how program will continue executing in spite of them
+  * programmers can also "raise" exceptions to force a runtime error in certain use cases
+
+
+### Try-Except Block
+  * to handle exceptions
+
+```python
+import math
+
+try:
+    anumber = -3
+    print(math.sqrt(anumber))
+except RuntimeError as e:
+    print("Bad Value for square root")
+    print("Using absolute value instead")
+    print(math.sqrt(abs(anumber)))
+```
+
+### Raise Exception
+
+```python
+import math
+
+anumber = -3
+if anumber < 0:
+    raise RuntimeError("Negative numbers are forbidden")
+else:
+    print(math.sqrt(anumber))
+```
+
+### Functions
+
+```python
+def square(n):
+    return n**2
+```
+
