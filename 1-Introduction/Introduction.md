@@ -107,7 +107,7 @@ capitals = {'Iowa':'DesMoines','Wisconsin':'Madison'}
 | key in myDict    | return True if key in dict, else False |
 | del myDict[key]  | delete key from dict                   |
 
-### 1.9.1 String Formatting
+## 1.9.1 String Formatting
 
 #### Using print()
 
@@ -121,21 +121,22 @@ Mary is 19 years old
 >> print("No one is more hateable than a %(first)s %(last)s "%name)
 ```
 
-| Format Operator | Description                     |
-|-----------------|---------------------------------|
-| %d, %i          | integer                         |
-| %u              | unsigned integer                |
-| %f              | floating point as m.ddddd       |
-| %e              | floating point as m.ddddde+/-xx |
-| %E              | floating point as m.dddddE+/-xx |
-| %c              | single character                |
-| %s              | string                          |
-| %%              | literal %                       |
-| %20s            | value in 20 char wide field     |
-| %-20s           | value in 20 char wide field, left justified |
-| %+20s           | value in 20 char wide field, right justified |
+| Format Operator | Description                                               |
+|-----------------|-----------------------------------------------------------|
+| %d, %i          | integer                                                   |
+| %u              | unsigned integer                                          |
+| %f              | floating point as m.ddddd                                 |
+| %e              | floating point as m.ddddde+/-xx                           |
+| %E              | floating point as m.dddddE+/-xx                           |
+| %c              | single character                                          |
+| %s              | string                                                    |
+| %%              | literal %                                                 |
+| %03d            | left padded with 0's for total length of 3 digits         | 
+| %20s            | value in 20 char wide field                               |
+| %-20s           | value in 20 char wide field, left justified               |
+| %+20s           | value in 20 char wide field, right justified              |
 | %20.2f          | value in 20 char wide field, with 2 char right of decimal |
-| %(key)s         | get value from dictionary |
+| %(key)s         | get value from dictionary                                 |
 
 ## Control Structures
 
@@ -224,10 +225,32 @@ else:
     print(math.sqrt(anumber))
 ```
 
-### Functions
+## 1.12 Functions
 
 ```python
 def square(n):
     return n**2
 ```
 
+## 1.13 Classes
+  * classes allow programmers to implement an abstract data type by defining members and methods
+
+```commandline
+class Fraction:
+    def __init__(self, num, den):
+        self.num = num
+        self.den = den
+    
+    
+    def __str__(self):
+    """
+    Overrides built-in method __str__ so program implements your function below instead
+    """
+        return f"{self.num}/{self.den}"
+        
+        
+a = Fraction(1,2) #creates a fraction object
+print(a) #prints "1/2"
+```
+
+See [fractions.py in exercises folder](exercises/fractions.py) for full implementation of Fraction class
