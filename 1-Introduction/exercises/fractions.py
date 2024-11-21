@@ -62,10 +62,23 @@ class Fraction:
         return Fraction(new_num // common, new_den // common)
 
     def __eq__(self, other):
+        """
+        Checks for deep equality between the fraction with an other fraction
+        Args:
+            other (Fraction): another fraction to compare to
+        Returns:
+            (bool): whether the fraction has the same value as the other fraction
+        """
         num1 = self.num * other.den
         num2 = other.num * self.den
 
         return num1 == num2
+
+    def __gt__(self, other):
+        return (self.num/self.den) > (other.num/other.den)
+
+    def __lt__(self, other):
+        return (self.num/self.den) < (other.num/other.den)
 
 
 if __name__ == "__main__":
@@ -76,3 +89,5 @@ if __name__ == "__main__":
     print(x == y)
     print(x * y)
     print(x / y)
+    print(x > y)
+    print (x < y)

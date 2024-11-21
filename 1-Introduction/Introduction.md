@@ -232,7 +232,8 @@ def square(n):
     return n**2
 ```
 
-## 1.13 Classes
+## 1.13 Object-Oriented Programming
+## 1.13.1 Classes
   * classes allow programmers to implement an abstract data type by defining members and methods
 
 ```commandline
@@ -253,4 +254,27 @@ a = Fraction(1,2) #creates a fraction object
 print(a) #prints "1/2"
 ```
 
-See [fractions.py in exercises folder](exercises/fractions.py) for full implementation of Fraction class
+See [fractions.py in exercises folder](./exercises/fractions.py) for full implementation of Fraction class
+
+### Shallow vs Deep Equality
+
+* **shallow equality**: when object o1 and o2 reference the same object, o1 == o2
+* **deep equality**: when object o1 and o2 don't reference the same object but have the same value o1 == o2
+
+
+
+## 1.13.2 Inheritance
+  * key feature of object oriented programming
+  * allowing child classes to inherit methods and members from parent classes
+    * child class: aka subclass
+    * parent class: aka superclass
+  * see [logic_gates.py in exercises folder](./exercises/logic_gates.py) for a demonstration of inheritance
+
+### Inheritance Hierarchy
+
+![Inheritance Hierarchy](inheritance_hierarchy.png)
+
+  * **IS-A Relationship**: child has an "is-a" relationship to parent
+    * e.g a list is a sequential collection in Python
+    * implies that the child will inherit members and methods from the parent
+    * the child also distinguishes itself from the parent by having some of its own members or methods
