@@ -4,6 +4,8 @@ A logic gate takes in boolean inputs, and outputs a boolean value based on simpl
 Each logical operation is based on a truth table which we will use to simplify calculating the output.
 """
 
+import itertools
+
 class LogicGate:
     def __init__(self, label) -> None:
         """
@@ -148,7 +150,7 @@ class ORGate(BinaryGate):
 class NORGate(BinaryGate):
     def __init__(self, label, pin_a=None, pin_b=None) -> None:
         super().__init__(label, pin_a, pin_b)
-        self.truth_table = [[1,0]
+        self.truth_table = [[1,0],
                             [0,0]]
 
 class NOTGate(UnaryGate):
@@ -177,17 +179,30 @@ class Connector:
 
 if __name__ == "__main__":
     #Prove NOT(( A and B) or (C and D)) == NOT( A and B ) and NOT (C and D)
-    A = 1
-    B = 1
-    C = 1
-    D = 1
-    AandB = ANDGate("AandB", A,B)
-    CandD = ANDGate("CandD", C, D)
-    ABorCD = ORGate("ABorCD")
-    c1 = Connector
 
-    print(g2.get_output())
+    inputs = list(itertools.product([0,1], repeat=4))
 
+    for input in inputs:
+        AB = ANDGate("(A and B)", input[0],input[1])
+        CD = ANDGate("(C and D)", input[2], input[3])
+        ABorCD = ORGate("( A and B) or (C and D)")
+        c1 = Connector(from_gate=AB, to_gate=ABorCD)
+        c2 = Connector(from_gate=CD, to_gate=ABorCD)
+        nABorCD = NOTGate("NOT(( A and B) or (C and D))")
+        c3 = Connector(from_gate=ABorCD, to_gate=nABorCD)
+
+        nAB = NOTGate("NOT( A and B )")
+        c4 = Connector(from_gate=AB, to_gate=nAB)
+
+        nCD = NOTGate("NOT (C and D)")
+        c5 = Connector(from_gate=CD, to_gate=nCD)
+
+        nABnCD = ANDGate("NOT( A and B ) and NOT (C and D)")
+        c6 = Connector(from_gate = nAB, to_gate=nABnCD)
+        c7 = Connector(from_gate= nCD, to_gate= nABnCD)
+
+
+        print(input, nABorCD.get_output() == nABnCD.get_output())
 
     
 
