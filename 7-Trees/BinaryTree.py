@@ -5,39 +5,54 @@ class BinaryTree:
         self.right_child = None
     
     def insertLeft(self,node):
-        child = BinaryTree(node)
-        if not self.left_child:
-            self.left_child = child
+        if self.left_child == None:
+            self.left_child = BinaryTree(node)
         else:
-            current_node = self.left_child
-            while current_node.left_child:
-                current_node = current_node.left_child
-            current_node.left_child = child
+            t = BinaryTree(node)
+            t.left_child = self.left_child
+            self.left_child = t
 
     def insertRight(self,node):
-        child = BinaryTree(node)
-        if not self.right_child:
-            self.right_child = child
+        if self.right_child == None:
+            self.right_child = BinaryTree(node)
         else:
-            current_node = self.right_child
-            while current_node.right_child:
-                current_node = current_node.right_child
-            current_node.right_child = child
+            t = BinaryTree(node)
+            t.right_child = self.right_child
+            self.right_child = t
 
-    def getRightChild(self):
-        return self.rightChild
+    def getRightChild(self): 
+        return self.right_child
 
     def getLeftChild(self):
-        return self.leftChild
+        return self.left_child
 
     def setRootVal(self,obj):
         self.key = obj
 
     def getRootVal(self):
         return self.key
+    
+    def evaluate(self):
+        pass
 
+    
+    def preOrderTraversal(self):
+        print(self.getRootVal())
+        if self.getLeftChild():
+            self.getLeftChild().preOrderTraversal()
+        if self.getRightChild():
+            self.getRightChild().preOrderTraversal()
+
+    def inOrderTraversal(self):
+        if self.getLeftChild():
+            self.getLeftChild().inOrderTraversal()
+        print(self.getRootVal())
+        if self.getRightChild():
+            self.getRightChild().inOrderTraversal()
+    
     def __str__(self):
         return self._pretty_print()
+    
     
     def _pretty_print(self, prefix="", is_tail=True, result=None):
         """
@@ -84,7 +99,9 @@ class BinaryTree:
 if __name__ == "__main__":
     a = BinaryTree("a")
     a.insertLeft("b")
-    a.insertLeft("e")
-    a.insertLeft("d")
     a.insertRight("c")
+    a.insertRight("d")
+    a.insertLeft("e")
+    a.insertRight("f")
     print(a)
+    a.preOrderTraversal()
