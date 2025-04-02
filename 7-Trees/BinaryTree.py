@@ -49,6 +49,26 @@ class BinaryTree:
         print(self.getRootVal())
         if self.getRightChild():
             self.getRightChild().inOrderTraversal()
+
+    def postOrderTraversal(self):
+        if self.getLeftChild():
+            self.getLeftChild().postOrderTraversal()
+        if self.getRightChild():
+            self.getRightChild().postOrderTraversal()
+        print(self.getRootVal())
+
+    def levelOrderTraversal(self, is_root = True):
+        if is_root:
+            print(self.getRootVal())
+        if self.getLeftChild():
+            print(self.getLeftChild().getRootVal())
+        if self.getRightChild():
+            print(self.getRightChild().getRootVal())
+        if self.getLeftChild():
+            self.getLeftChild().levelOrderTraversal(is_root=False)
+        if self.getRightChild():
+            self.getRightChild().levelOrderTraversal(is_root=False)
+
     
     def __str__(self):
         return self._pretty_print()
@@ -104,4 +124,4 @@ if __name__ == "__main__":
     a.insertLeft("e")
     a.insertRight("f")
     print(a)
-    a.preOrderTraversal()
+    a.levelOrderTraversal()
