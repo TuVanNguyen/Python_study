@@ -82,14 +82,25 @@ class BinHeap:
         left, right = (item_pos * 2), (item_pos * 2 + 1)
         if left >= len(self.heapList):
             return None
-        elif right >= len(self.heapList) or self.heapList[left] < self.heapList[right]:
+        elif (right >= len(self.heapList)) or (self.heapList[left] < self.heapList[right]):
             return left
         else:
             return right
-        
-
-
     
+    def buildHeap(self, unordered_list):
+        """
+        Reorders list so that it satisfies the binary heap properties
+        Args: 
+            unordered_list (List[int]): initial list to reorder
+        Returns:
+            None
+        """
+        node = len(unordered_list)//2
+        self.heapList = unordered_list
+        while (node>=0):
+            self.percDown(node)
+            node -= 1
+
 
 if __name__ == "__main__":
     my_heap = BinHeap()
@@ -98,6 +109,7 @@ if __name__ == "__main__":
     my_heap.insert(1)
     my_heap.insert(6)
     my_heap.deleteMin()
+    my_heap.buildHeap([9,5,6,2,3])
     print(my_heap.heapList)
         
     
