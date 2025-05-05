@@ -25,30 +25,30 @@ class Graph:
 
     def addVertex(self,key):
         newVertex = Vertex(key)
-        self.vertList[key] = newVertex
+        self.vertexList[key] = newVertex
         return newVertex
 
     def getVertex(self,n):
-        if n in self.vertList:
-            return self.vertList[n]
+        if n in self.vertexList:
+            return self.vertexList[n]
         else:
             return None
 
     def __contains__(self,n):
-        return n in self.vertList
+        return n in self.vertexList
 
     def addEdge(self,f,t,weight=0):
-        if f not in self.vertList:
+        if f not in self.vertexList:
             nv = self.addVertex(f)
-        if t not in self.vertList:
+        if t not in self.vertexList:
             nv = self.addVertex(t)
-        self.vertList[f].addNeighbor(self.vertList[t], weight)
+        self.vertexList[f].addNeighbor(self.vertexList[t], weight)
 
     def getVertices(self):
-        return self.vertList.keys()
+        return self.vertexList.keys()
 
     def __iter__(self):
-        return iter(self.vertList.values())
+        return iter(self.vertexList.values())
 
     
         
