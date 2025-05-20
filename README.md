@@ -9,4 +9,5 @@
 ## To-dos
 * complete implementation of [Binary Search Tree](7-Trees/BinarySearchTree.py)
 * complete implementation of AVL tree
+* complete implementation of Knight's Tour
 
