@@ -9,6 +9,11 @@
   * the study of **abstraction** of problems and algorithms
     * e.g user interfaces, the use of libraries to reuse solutions without knowing all the details
 
+### 1.3.1 Algorithms
+In the context of most applications (especially coding interviews), algorithms should be:
+* deterministic: given same input, should always return same output (no randomness)
+* returns correct answer for any arbitrary valid input
+
 ## 1.4 What is Programming?
   * writing an algorithm into a programming language, to be executed by a computer
   * creating the representation on our solutions
