@@ -12,5 +12,32 @@
     * `__len__`: magic method to count number of objects contained in the class
     * ability to iterate over the items in the class
     * allow users to access items using `[]` notation
+
+## Access Specifiers
+
+Access Specifiers control how accessible class members are.
+
+
+* public: can be accessed from inside and outside the class
+* protected: can only be accessed within the class and its subclasses
+* private: can only be accessed from within the class
+
+```
+class Myclass:
+
+  def __init__(self):
+    self.public_attribute = "I'm public!" 
+    self._protected_attribute = "I'm protected." # underscore prefix
+    self.__private_attribute = "I'm private" # double underscore prefix
+
+  def public_method(self):
+    print("This is public!")
+
+  def _protected_method(self): # underscore prefix
+    print("This is protected.")
+
+  def __private_method(self): # double underscore prefix
+    print("This is private.") 
+```
     
      
