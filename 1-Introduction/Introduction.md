@@ -283,3 +283,8 @@ See [fractions.py in exercises folder](./exercises/fractions.py) for full implem
     * e.g a list is a sequential collection in Python
     * implies that the child will inherit members and methods from the parent
     * the child also distinguishes itself from the parent by having some of its own members or methods
+
+
+## References
+
+[](http://interactivepython.org/runestone/static/pythonds/index.html)
