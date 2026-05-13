@@ -1,26 +1,24 @@
-from typing import Optional
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+def minReorder(self, n: int, connections: List[List[int]]) -> int:
+    reroutes = 0
+    adjacent = {n: dict() for n in range(n)}
+    seen = set()
 
-def getMinimumDifference(root: Optional[TreeNode]) -> int:
-    last_node = None
-    min_diff = float("inf")
-    def dfs(root: Optional[TreeNode]):
-        nonlocal last_node
-        nonlocal min_diff
-        if root == None:
+    for route in connections:
+        adjacent[route[0]][route[1]] = 0
+        adjacent[route[1]][route[0]] = 1
+
+    def dfs(city):
+        nonlocal reroutes
+        if city in seen:
             return
-        dfs(root.left)
-        if last_node:
-            min_diff = min(min_diff, root.val- last_node.val)
-        last_node = root
-        dfs(root.right)
-        
-    dfs(root)
-    return min_diff
+        seen.add(city)
+        for city_2, direction in adjacent[city].items():
+            if city_2 not in seen and direction == 0:
+                reroutes += 1
+            dfs(city_2)                
+
+    dfs(0)
+    return reroutes
 
 
 
