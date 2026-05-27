@@ -40,5 +40,32 @@
 ### Basic Roadmap for Learning System Design
 ![alt text](.imgs/system_design_roadmap.png)
 
+### Core Concepts
+[Networking](1.Core_Concepts/Networking.md)
+
+[API Design](1.Core_Concepts/API.md)
+
+[Data Modeling](1.Core_Concepts/DataModeling.md)
+
+[Caching](1.Core_Concepts/Caching.md)
+
+[Sharding](1.Core_Concepts/Sharding.md)
+
+[Consistent Hashing](1.Core_Concepts/ConsistentHashing.md)
+
+[CAP Theorem](1.Core_Concepts/CAP.md)
+
+### Key Technologies
+[API Gateway](2.KeyTechnologies/APIGateway.md)
+
+[Kafka](2.KeyTechnologies/Kafka.md)
+
+[DynamoDB](2.KeyTechnologies/AWS/DynamoDB.md)
+
+[DynamoDB]
+
 ## Resources
 [Hello Interview](https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction)
+
+## Books
+*Designing Data-Intensive Applications* by Martin Kleppmann
