@@ -1,25 +1,36 @@
-def minReorder(self, n: int, connections: List[List[int]]) -> int:
-    reroutes = 0
-    adjacent = {n: dict() for n in range(n)}
-    seen = set()
+from collections import deque
+from math import ceil
+class Solution:
+    def snakesAndLadders(self, board: List[List[int]]) -> int:
+        n = len(board)
+        squares = []
 
-    for route in connections:
-        adjacent[route[0]][route[1]] = 0
-        adjacent[route[1]][route[0]] = 1
+        for i in range(n-1,-1,-1):
+            left_right = (n-i)%2
+            col_order = range(n) if left_right else range(n-1,-1,-1)
+            for j in col_order:
+                squares.append(board[i][j])
 
-    def dfs(city):
-        nonlocal reroutes
-        if city in seen:
-            return
-        seen.add(city)
-        for city_2, direction in adjacent[city].items():
-            if city_2 not in seen and direction == 0:
-                reroutes += 1
-            dfs(city_2)                
+        destinations = deque([(1,0)])
+        seen = {1}
 
-    dfs(0)
-    return reroutes
+        while destinations:
+            curr, steps = destinations.popleft()
+            if curr == n*n:
+                return steps
+            for next_num in range(curr+1, min(curr+6, n**2) + 1):
+                next_steps = steps + 1
+                next_square = squares[next_num-1]
+                if next_square != -1:
+                    next_num = next_square
+                if next_num in seen:
+                    continue
+                seen.add(next_num)
+                destinations.append((next_num, next_steps))
+        return -1
 
+
+        
 
 
 
