@@ -25,3 +25,10 @@
 * Transport Layer(4)
 * Network Layer(3)
 
+## Important Examples
+
+### A Web Request
+> What happens when you type a URL into your browser and press ENTER?
+
+
+
