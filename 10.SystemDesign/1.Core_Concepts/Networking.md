@@ -24,7 +24,7 @@
 * Transport Layer(4)
 * Network Layer(3)
 
-## Application Layer
+## Application Layer Protocols
 
 ### HTTP/HTTPS
 * standard protocol for data communication on the internet
@@ -32,6 +32,8 @@
     * client sends request to server
     * server receives request and sends back response
 * stateless: each request is independent, and server doesn't store data about past requests
+
+
 
 #### Common Request Methods
 * **GET**: get data from server
@@ -60,38 +62,34 @@
     * 500 Server error: generic error in server
     * 502 Bad Gateway: server received invalid response from upstream server
 
-> What is the difference between HTTP and HTTPS, and why would I use HTTPS?
+<detail>
+<summary>
+What is the difference between HTTP and HTTPS, and why would I use HTTPS?
+</summary>
+HTTPS is HTTP with an additional security layer that uses the TLS/SSL protocol to encrypt communications. You should use HTTPS for any public website to protect against eavesdropping, and man-in-the-middle attacks.  
+</details>
 
-$$\color{black}
-{\test{
-    HTTPS is HTTP with an additional security layer that uses the TLS/SSL protocol to encrypt communications. You should use HTTPS for any public website to protect against eavesdropping, and man-in-the-middle attacks.  
-}}$$
 
-### API Design Paradigms
-* REST(Representational State Transfer)
-* 
+### Server-Sent Events
+* supports one-way streaming from server to client
+* can be used on top of HTTP (so browsers support it)
+    * client can receive the stream from the server as one big HTTP response (same TCP connection)
+    * within that response, the client gets separate packets it can process before receiving all the packets
 
-#### REST
-* based on idea that clients are mostly performing simple operations on resources e.g files, database tables
-* In RESTful API design, you set up operations that can find the requested resource and perform the requested operation
-    * typically use HTTP method to identify the operation to perform
-    * has conventions on request path or body to make it easy to identify requested resource
+#### Why Use SSE?
+* clients want to get notifications or events ASAP e.g auction site
 
-```Example: GET /users/{id} -> User```
-* This is an operation to get a user by `id` from the resource `users`
-* `id` is a path parameter
+### Websockets
+* bidirectional communication streams
+* initiated via HTTP "upgrade" protocol to switch a previous connection over TCP protocol, to the Websocket connection 
+    * also transfer over existing HTTP session info to the new connection e.g cookies, headers, etc
+* more widely supported than gRPC, but support can still be patchy
 
-```
-# Example
-PUT /users/{id} -> User
-{
-  "username": "john.doe",
-  "email": "john.doe@example.com"
-}
-```
-* This is an operation to add a new user with `id` in the resource `users`
-* everything in the brackets is the request body, which will be used to add additional details about the new user
-
+#### Websocket Connection Steps
+1. client establishes TCP connection with server
+1. client starts Websocket handshake over HTTP
+1. connection upgrades to Websocket protocol
+1. 
 
 ## Transport Layer Protocols
 
@@ -113,25 +111,29 @@ PUT /users/{id} -> User
 | Speed | Slower due to overhead | Faster |
 | Use Cases | used by default | audio/voice streams, gaming|
 
-> Give an example of how TCP and UDP can be used together in one application.
+<details>
+<summary>
+Why would I want to use UDP over TCP, and vice versa?
+</summary>
+I want UDP when I need the data stream to come in immediately, and reliability or ordering is not important. If I'm watching a 
+video from Youtube, I'm ok with occasional glitches or skipped frames because I can always rewind. But I'll probably stop watching altogether if buffering a video takes too long.
 
-$$\color{black}
-{\test{
-    They can both be used in a video conferencing app like Zoom. The app would use TCP for initiating calls, adjusting app settings, and text chatting. All these features require total reliability, maintaining order of requests/messages, and don't require a lot of speed. The audio and video streaming is conducted through UDP. These features require low latency and low buffering, with some missed packets being acceptable.
-}}$$
+I want TCP when I need to ensure data reaches the recipient in the right order. If I/m trading stocks online, I may need to ensure a sell order completes before a buy over and that both orders were received. I don't mind if it takes a couple of minutes to receive acknowledgement of my orders.
+</details>
 
+<details>
+<summary>
+Give an example of how TCP and UDP can be used together in one application.
+</summary>
+They can both be used in a video conferencing app like Zoom. The app would use TCP for initiating calls, adjusting app settings, and text chatting. All these features require total reliability, maintaining order of requests/messages, and don't require a lot of speed. The audio and video streaming is conducted through UDP. These features require low latency and low buffering, with some missed packets being acceptable.
+
+</details>
 
 ## Important Examples
 
 ### A Web Request
-> What happens when you type a URL into your browser and press ENTER?
-
-$$\color{black}
-{\text{
-    The client (the web browser) looks up the IP address for the domain name. Then, the client initiates a TCP connection with the website server, using a 3-way handshake: the client sends a synchronize packet (SYN) to the server to request a connection; the server responds with a synchronize-acknowlege (SYN-ACK) packet to acknowledge the request; The client sends an ACK packet to establish the connection. Once the TCP connection is established, the client sends an HTTP GET request to fetch the web page. The server receives the request, retrieves the requested web page, then sends back a response with the web page. When the data transfer is complete, the client and server close the connection using a 4-way handshape: 1st the client sends a FIN (finish) packet to the server to terminate the connection; 2nd the server sends an ACK package upon receiving the FIN packet; 3rd the server sends a FIN packet to close its side of the connection; 4th the client acknowledge the FIN packet with an ACK packet. 
-}}$$
-
-
-
-
-
+<details>
+<summary> What happens when you type a URL into your browser and press ENTER?
+</summary>
+The client (the web browser) looks up the IP address for the domain name. Then, the client initiates a TCP connection with the website server, using a 3-way handshake: the client sends a synchronize packet (SYN) to the server to request a connection; the server responds with a synchronize-acknowlege (SYN-ACK) packet to acknowledge the request; The client sends an ACK packet to establish the connection. Once the TCP connection is established, the client sends an HTTP GET request to fetch the web page. The server receives the request, retrieves the requested web page, then sends back a response with the web page. When the data transfer is complete, the client and server close the connection using a 4-way handshape: 1st the client sends a FIN (finish) packet to the server to terminate the connection; 2nd the server sends an ACK package upon receiving the FIN packet; 3rd the server sends a FIN packet to close its side of the connection; 4th the client acknowledge the FIN packet with an ACK packet. 
+</details>
